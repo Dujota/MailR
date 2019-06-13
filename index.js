@@ -28,7 +28,11 @@ app.get('/testRoute', (req, res) => {
   res.send({ hello: 'world' });
 });
 
-// on the route, instead of defining a callback, we tell the route handler to use the passport.authenticate method to handle the route response with the google strategy
+/**
+ * @step1 on the route, instead of defining a callback,
+ * @step2 we tell the route handler to use the passport.authenticate method to handle the route response with the google strategy
+ * @step3 passs an objects object , with scope array to let the strategy know what we want to access from google
+ */
 app.get(
   '/auth/google',
   passport.authenticate('google', {
