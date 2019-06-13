@@ -13,11 +13,14 @@ const PORT = process.env.PORT || 5000; // heroku port || local
  * use(), prodivdes passport with a new strategy to handle the auth process.
  */
 passport.use(
-  new GoogleStrategy({
-    clientID: keys.googleClientID,
-    clientSecret: keys.googleClientSecret,
-    callbackURL: `/auth/google/callback`,
-  })
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: `/auth/google/callback`,
+    },
+    accessToken => window.console.log(accessToken)
+  )
 );
 
 app.listen(PORT, () => {
