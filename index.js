@@ -42,5 +42,5 @@ app.get(
 
 // SERVER IS RUNNING MSG
 app.listen(PORT, () => {
-  console.log(`Listendi ng on Port: ${PORT}`);
+  console.log(`Listening on Port: ${PORT}`);
 });
