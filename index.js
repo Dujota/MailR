@@ -19,10 +19,24 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: `/auth/google/callback`,
     },
-    accessToken => window.console.log(accessToken)
+    accessToken => console.log(accessToken)
   )
 );
 
+// Route Handler
+app.get('/testRoute', (req, res) => {
+  res.send({ hello: 'world' });
+});
+
+// on the route, instead of defining a callback, we tell the route handler to use the passport.authenticate method to handle the route response with the google strategy
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profil', 'email'],
+  })
+);
+
+// SERVER IS RUNNING MSG
 app.listen(PORT, () => {
-  window.console.log(`Listending on Port: ${PORT}`);
+  console.log(`Listendi ng on Port: ${PORT}`);
 });
