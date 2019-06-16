@@ -44,6 +44,10 @@ app.get(
   })
 );
 
+/**
+ *  this is route that user returns to from the oauth flow
+ * @passtportJS google strategy passed in. It knows the code property is inside the url and retreives the profile
+ */
 app.get('/auth/google/callback', passport.authenticate('google'));
 
 // SERVER IS RUNNING MSG
