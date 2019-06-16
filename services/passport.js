@@ -1,13 +1,13 @@
-const express = require('express');
-
-const app = express();
-const PORT = process.env.PORT || 5000; // heroku port || local
+const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
-// PASSPORT MIDDLEWARE
-/**  Call the new Google Oauth Instance with config option and pass it to passport
+const keys = require('../config/keys');
+
+/**
+ * @PASSPORT @MIDDLEWARE
+ *   Call the new Google Oauth Instance with config option and pass it to passport
  * use(), prodivdes passport with a new strategy to handle the auth process.
  */
+
 passport.use(
   new GoogleStrategy(
     {
@@ -22,8 +22,3 @@ passport.use(
     }
   )
 );
-
-// SERVER IS RUNNING MSG
-app.listen(PORT, () => {
-  console.log(`Listening on Port: ${PORT}`);
-});
