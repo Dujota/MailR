@@ -6,6 +6,9 @@ const keys = require('../config/keys');
 // Set up the connection to mongo and the diretly access the User through mongoose, DO NOT require the user model file
 const User = mongoose.model('users');
 
+// Serialization for the cookie, it accepts the user that comes from the mongoose query and passport done cb
+passport.serializeUser((user, done) => {});
+
 /**
  * @PASSPORT @MIDDLEWARE
  *   Call the new Google Oauth Instance with config option and pass it to passport
