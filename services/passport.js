@@ -7,7 +7,10 @@ const keys = require('../config/keys');
 const User = mongoose.model('users');
 
 // Serialization for the cookie, it accepts the user that comes from the mongoose query and passport done cb
-passport.serializeUser((user, done) => {});
+passport.serializeUser((user, done) => done(null, user.id));
+
+// first afrugment is whatever we expect back from teh cookie
+passport.deserializeUser((id, done) => User.findById(id).then(user => done(null, user)));
 
 /**
  * @PASSPORT @MIDDLEWARE
