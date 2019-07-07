@@ -1,7 +1,8 @@
 const express = require('express');
+require('./services/passport');
 const mongoose = require('mongoose');
 const { mongoURI } = require('./config/keys');
-require('./services/passport');
+require('./models/User');
 
 // Connecting Mongoose to App on Bootup
 mongoose.connect(mongoURI, { useNewUrlParser: true }).catch(err => console.log(err));
