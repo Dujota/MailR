@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { mongoURI } = require('./config/keys');
 require('./services/passport');
 
-// Connecting Mongoose
+// Connecting Mongoose to App on Bootup
 mongoose.connect(mongoURI, { useNewUrlParser: true }).catch(err => console.log(err));
 
 // we declare the app object, then require the routes, and immediate invoke the auth routes exported function with the app object
