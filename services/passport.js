@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
@@ -22,7 +21,16 @@ passport.use(
     }, // this callback is fired when /auth/google/callback finishes (passportJS exchanges code for api data)
     (accessToken, refreshToken, profile, done) => {
       const { id: googleId } = profile;
-      new User({ googleId }).save();
+      // Query DB for the user coming for Google-OAtuh
+      User.findOne({ googleId }).then(existingUser => {
+        if (existingUser) {
+          console.log('user exists!!!');
+          return;
+          // already have a record with a given profile id
+        }
+        // we dont have a user in the db, make a new record
+        return new User({ googleId }).save();
+      });
     }
   )
 );
