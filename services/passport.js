@@ -24,12 +24,11 @@ passport.use(
       // Query DB for the user coming for Google-OAtuh
       User.findOne({ googleId }).then(existingUser => {
         if (existingUser) {
-          console.log('user exists!!!');
-          return;
-          // already have a record with a given profile id
+          // done argument calls : error object, user to auth
+          return done(null, existingUser);
         }
-        // we dont have a user in the db, make a new record
-        return new User({ googleId }).save();
+        // Create a new user and then call done with that user
+        return new User({ googleId }).save().then(user => done(null, user));
       });
     }
   )
