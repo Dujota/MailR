@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { mongoURI } = require('./config/keys');
+require('./models/User'); // make sure that the user model is defined before you use them in another file
 require('./services/passport');
-require('./models/User');
 
 // Connecting Mongoose to App on Bootup
 mongoose.connect(mongoURI, { useNewUrlParser: true }).catch(err => console.log(err));

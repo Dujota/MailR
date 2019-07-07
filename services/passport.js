@@ -1,6 +1,10 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mongoose = require('mongoose');
 const keys = require('../config/keys');
+
+// Set up the connection to mongo and the diretly access the User through mongoose, DO NOT require the user model file
+const User = mongoose.model('users');
 
 /**
  * @PASSPORT @MIDDLEWARE
@@ -16,9 +20,8 @@ passport.use(
       callbackURL: `/auth/google/callback`,
     }, // this callback is fired when /auth/google/callback finishes (passportJS exchanges code for api data)
     (accessToken, refreshToken, profile, done) => {
-      console.log('accessToken', accessToken);
-      console.log('refreshToken', refreshToken);
-      console.log('profile', profile);
+      const { id: googleId } = profile;
+      return new User({ googleId }).save;
     }
   )
 );
