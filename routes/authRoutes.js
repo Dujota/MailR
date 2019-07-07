@@ -24,4 +24,9 @@ module.exports = app => {
    * @passtportJS google strategy passed in. It knows the code property is inside the url and retreives the profile
    */
   app.get('/auth/google/callback', passport.authenticate('google'));
+
+  // route handler for the current_user
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
 };
