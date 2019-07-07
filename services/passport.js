@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
@@ -21,7 +22,7 @@ passport.use(
     }, // this callback is fired when /auth/google/callback finishes (passportJS exchanges code for api data)
     (accessToken, refreshToken, profile, done) => {
       const { id: googleId } = profile;
-      return new User({ googleId }).save;
+      new User({ googleId }).save();
     }
   )
 );
